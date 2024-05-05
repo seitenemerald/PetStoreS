@@ -5,12 +5,12 @@
 #spring:
 #  profiles: local
 #base:
-#  url: https://petstore.swagger.io
+url: https://petstore.swagger.io
 #---
 #spring:
 #  profiles: local2
 #base:
-#  url: https://petstore2.swagger.io
+url2: https://petstore2.swagger.io
 #---
 #report:
 #  add:

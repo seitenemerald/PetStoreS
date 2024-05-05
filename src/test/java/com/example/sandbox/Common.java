@@ -59,7 +59,23 @@ public class Common extends Endpoints {
     }
 
     //----------------------------------POST----------------------------------
-    public Response postUrl(String endpoint,String body){
+    public Response postUrl(String endpoint){   //empty POST request
+
+
+        return given()
+                .relaxedHTTPSValidation()
+                .contentType("application/json; charset=UTF-8")
+                .and()
+                .log().everything()
+                .when()
+                .post(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+
+    }
+    public Response postUrl(String endpoint, Map<String, String> body){
 
 
         return given()
@@ -76,9 +92,74 @@ public class Common extends Endpoints {
                 .extract().response();
 
     }
+    public Response postUrl(String endpoint,Map<String, String> headers,Map<String, String> body){
+
+
+        return given()
+                .relaxedHTTPSValidation()
+                .contentType("application/json; charset=UTF-8")
+                .headers(headers)
+                .body(body)
+                .and()
+                .log().everything()
+                .when()
+                .post(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+
+    }
 
     //----------------------------------PUT----------------------------------
+    public Response putUrl(String endpoint, Map<String, String> body){
+
+
+        return given()
+                .relaxedHTTPSValidation()
+                .contentType("application/json; charset=UTF-8")
+                .body(body)
+                .and()
+                .log().everything()
+                .when()
+                .post(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+
+    }
+    public Response putUrl(String endpoint,Map<String, String> headers,Map<String, String> body){
+
+
+        return given()
+                .relaxedHTTPSValidation()
+                .contentType("application/json; charset=UTF-8")
+                .headers(headers)
+                .body(body)
+                .and()
+                .log().everything()
+                .when()
+                .post(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+
+    }
 
     //----------------------------------DELETE----------------------------------
+    public Response deleteUrl(String endpoint){
+        return given()
+                .relaxedHTTPSValidation()
+                .and()
+                .log().everything()
+                .when()
+                .delete(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+    }
 }
 
