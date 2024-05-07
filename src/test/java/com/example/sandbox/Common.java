@@ -4,12 +4,13 @@ import io.restassured.response.Response;
 
 import java.util.Map;
 
+import static com.example.sandbox.util.Tools.replacePetId;
 import static io.restassured.RestAssured.given;
 
 public class Common extends Endpoints {
 
     //----------------------------------GET----------------------------------
-    public Response getUrl(String endpoint){
+    protected Response getUrl(int petId){
 
 
         return given()
@@ -17,14 +18,14 @@ public class Common extends Endpoints {
                 .and()
                 .log().everything()
                 .when()
-                .get(baseUrl+endpoint)
+                .get(baseUrl + newPet +  replacePetId(petId))
                 .then()
                 .log()
                 .all()
                 .extract().response();
 
     }
-    public Response getUrl(String endpoint, Map<String, String> queryParam ){
+    protected Response getUrl(String endpoint, Map<String, String> queryParam ){
 
 
         return given()
@@ -40,7 +41,7 @@ public class Common extends Endpoints {
                 .extract().response();
 
     }
-    public Response getUrl(String endpoint,Map<String, String> headers,Map<String, String> queryParam ){
+    protected Response getUrl(String endpoint,Map<String, String> headers,Map<String, String> queryParam ){
 
 
         return given()
@@ -59,7 +60,7 @@ public class Common extends Endpoints {
     }
 
     //----------------------------------POST----------------------------------
-    public Response postUrl(String endpoint){   //empty POST request
+    protected Response postUrl(String endpoint){   //empty POST request
 
 
         return given()
@@ -75,7 +76,7 @@ public class Common extends Endpoints {
                 .extract().response();
 
     }
-    public Response postUrl(String endpoint, Map<String, String> body){
+    protected Response postUrl(String endpoint, Map<String, String> body){
 
 
         return given()
@@ -92,7 +93,24 @@ public class Common extends Endpoints {
                 .extract().response();
 
     }
-    public Response postUrl(String endpoint,Map<String, String> headers,Map<String, String> body){
+    protected Response postUrl(String endpoint, String body){
+
+
+        return given()
+                .relaxedHTTPSValidation()
+                .contentType("application/json; charset=UTF-8")
+                .body(body)
+                .and()
+                .log().everything()
+                .when()
+                .post(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+
+    }
+    protected Response postUrl(String endpoint,Map<String, String> headers,Map<String, String> body){
 
 
         return given()
@@ -112,7 +130,7 @@ public class Common extends Endpoints {
     }
 
     //----------------------------------PUT----------------------------------
-    public Response putUrl(String endpoint, Map<String, String> body){
+    protected Response putUrl(String endpoint, Map<String, String> body){
 
 
         return given()
@@ -129,7 +147,24 @@ public class Common extends Endpoints {
                 .extract().response();
 
     }
-    public Response putUrl(String endpoint,Map<String, String> headers,Map<String, String> body){
+    protected Response putUrl(String endpoint, String body){
+
+
+        return given()
+                .relaxedHTTPSValidation()
+                .contentType("application/json; charset=UTF-8")
+                .body(body)
+                .and()
+                .log().everything()
+                .when()
+                .put(baseUrl+endpoint)
+                .then()
+                .log()
+                .all()
+                .extract().response();
+
+    }
+    protected Response putUrl(String endpoint,Map<String, String> headers,Map<String, String> body){
 
 
         return given()
@@ -149,13 +184,13 @@ public class Common extends Endpoints {
     }
 
     //----------------------------------DELETE----------------------------------
-    public Response deleteUrl(String endpoint){
+    protected Response deleteUrl(int petId){
         return given()
                 .relaxedHTTPSValidation()
                 .and()
                 .log().everything()
                 .when()
-                .delete(baseUrl+endpoint)
+                .delete(baseUrl + newPet + replacePetId(petId))
                 .then()
                 .log()
                 .all()

@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Tests">
+
+    <!-- Test classes for the Smoke Tests -->
+    <test name="Smoke Tests">
+        <classes>
+            <class name="com.example.sandbox.Tests.findByIdTest.FindByIdTest"/>
+            <class name="com.example.sandbox.Tests.findByStatusTest.FindByStatusTest"/>
+            <class name="com.example.sandbox.Tests.postPetTest.PostPetTest"/>
+        </classes>
+    </test>
+
+</suite>

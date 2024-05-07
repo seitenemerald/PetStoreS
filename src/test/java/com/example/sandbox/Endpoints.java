@@ -11,9 +11,7 @@ public class Endpoints {
         return ("/pet/"+petId+"/uploadImage");
     }
     public static final String newPet = "/pet";             //PUT,POST
-    public static String petById(int petId){
-        return ("/pet/"+petId);
-    }
+    public static final String petId = "/{petId}";
 
     //-------------------------store-------------------------
 
